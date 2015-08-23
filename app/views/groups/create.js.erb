@@ -1,0 +1,5 @@
+<% if @msg.present? %>
+  $('#errormsg').replaceWith("<p id='errormsg'> <%= @msg %> </p>")
+<% else %>  
+  $('#addGroup').close();
+<% end %>  

@@ -1,0 +1,45 @@
+<h4><%= @grp.name%></h4>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Item</th>
+      <th>Amount</th>
+      <th>Paid by</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @expenses.each do |expense| %>
+    <tr>
+      <td><%= expense.created_at.strftime('%m/%d/%Y')%></td>
+      <td><%= expense.description%></td>
+      <td><%= expense.amount%></td>
+      <td><%= User.find(expense.paid_by).name%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% @members.each do |mem| %>
+  <h5><%= mem.name %> report:</h5>
+  <% share_amt = Expense.calculate_share_amt(mem, @grp)%>
+  <% contributors= @members.reject{ |m| m.id == mem.id} %>
+  <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Member</th>
+      <% contributors.each do |cont| %>
+        <th><%= cont.name %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= mem.name %></td>
+    <% contributors.each do |cont| %>
+      <% amt = Expense.fetch_contri(cont, share_amt, @grp)%>
+      <td><%=  amt > 0 ? 'Pay : ' : 'Get : '%><%= amt.abs %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

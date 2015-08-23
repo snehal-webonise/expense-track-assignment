@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyString
+  amount: 1
+  paid_by: 1
+  group: 
+
+two:
+  description: MyString
+  amount: 1
+  paid_by: 1
+  group: 
