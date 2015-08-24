@@ -16,7 +16,7 @@
 
   6. Run the following commands:-
 
-      cd <application_dir>
+      cd application_dir
 
       bundle install  # Install the necessary gems
 
