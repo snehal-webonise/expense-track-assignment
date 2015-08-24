@@ -6,8 +6,7 @@
   <%= javascript_include_tag "application" %>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Optional theme -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -21,7 +20,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="#" class="navbar-brand">Expense Tracking</a>
+        <a href='javascript:void(0)' class="navbar-brand">Expense Tracking</a>
       </div>
       <% if user_signed_in? %>
         <div class="navbar-collapse collapse navbar-right" id="navbar">
@@ -30,75 +29,101 @@
       <% end %>
       </div>
     </nav>
-      <% if user_signed_in? %>
-        <div class="row">
-          <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-              <li class="active"><a href="#">Groups<span class="sr-only">(current)</span></a></li>
-                <ul class="grpList">
-                  <% current_user.groups.each do |grp| %>
-                    <li><%= link_to grp.name, details_group_path(grp.id) %></li>
-                  <% end %>  
-                </ul>  
-            </ul>
-          </div>
+    <% if user_signed_in? %>
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href='javascript:void(0)'>Groups<span class="sr-only">(current)</span></a></li>
+              <%= render 'groups/group_list' %>
+          </ul>
+        </div>
         <div class="col-sm-9 col-md-10">
-          <h3 class="page-header header"><%= link_to current_user.name+ 's Dashboard', users_path %></h3>
-          <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#addGroup">Create Group</button>
-          <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#addBill">Add Bill</button>
+          <h3 class="page-header header"><%= link_to 'Welcome ' + current_user.name, users_path %></h3>
+          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addGroup">Create Group</button>
+          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addBill">Add Bill</button>
           <%= yield %>
 
-          <div id="addGroup" class="modal fade" role="dialog">
-            <div class="modal-dialog modal-sm" style='background-color:"#fff"'>
-              <!-- Modal content-->
+          <!-- Popup for create group-->
+          <div id="addGroup" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" style='background-color:"#fff"'>
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Create Group</h4>
+                  <h4 class="modal-title" id="myModalLabel">Create Group</h4>
                 </div>
-                <%= form_tag('/groups', remote: true) do %>
+                <%= form_tag('/groups', remote: true, class: 'form-horizontal') do %>
                   <div class="modal-body">
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <%= text_field_tag :name, nil, tabindex: '1', placeholder: 'Name', autofocus: true, class: "form-control"%>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <%= text_area_tag :description, nil, cols: '18', tabindex: '1', placeholder: 'Description',
+                        class: "form-control" %>
+                      </div>
+                    </div>
                     <p>Add member</p>
-                    <%= text_field_tag :name, nil, tabindex: '1', placeholder: 'Name', autofocus: true %>
-                    <%= text_area_tag :description, nil, cols: '18', tabindex: '1', placeholder: 'Description' %>
-                    <%= text_field_tag :email, nil, tabindex: '1', placeholder: 'Email Address' %>
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <input type="text" name="mytext[]" tabindex="1" placeholder="Email Address" class="form-control"/>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-10 input_fields_wrap">
+                        <button class="add_field_button btn btn-primary">Add More members</button>
+                       </div>
+                    </div>
                     <p id='errormsg'></p>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <%= submit_tag 'Add', class: 'btn btn-default' %>
+                    <%= submit_tag 'Add', class: "btn btn-primary" %>
                   </div>
-                <% end %>  
+                <% end %>
               </div>
             </div>
           </div>
 
-          <div id="addBill" class="modal fade" role="dialog">
-            <div class="modal-dialog modal-sm" style='background-color:"#fff"'>
-              <!-- Modal content-->
+          <!-- Popup for create bill-->
+          <div id="addBill" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" style='background-color:"#fff"'>
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Add Bill</h4>
                 </div>
-                <%= form_tag('/expenses', remote: true) do %>
+                <%= form_tag('/expenses', remote: true, class: 'form-horizontal') do %>
                   <div class="modal-body">
                     <p>With you and</p>
-                    <%= select_tag "group_id", options_from_collection_for_select(current_user.groups, "id", "name") %>
-                    <%= text_area_tag :description, nil, cols: '18', tabindex: '1', placeholder: 'Description' %>
-                    <%= text_field_tag :amount, nil, tabindex: '1', placeholder: 'Amount' %>
-                    <p id='errormsg'></p>
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <%= select_tag "group_id", options_from_collection_for_select(current_user.groups, "id", "name"), { class: "form-control" } %>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <%= text_area_tag :description, nil, cols: '18', tabindex: '1', placeholder: 'Description', class: "form-control" %>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <%= text_field_tag :amount, nil, tabindex: '1', placeholder: 'Amount', class: "form-control" %>
+                      </div>
+                    </div>
+                    <p id='billerrormsg'></p>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <%= submit_tag 'Add', class: 'btn btn-default' %>
+                    <%= submit_tag 'Add', class: 'btn btn-primary' %>
                   </div>
-                <% end %>  
+                <% end %>
               </div>
             </div>
           </div>
         </div>
-    </div>
+      </div>
     <% else %>
       <%= yield %>
     <% end %>

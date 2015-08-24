@@ -3,13 +3,10 @@ class UsersController < ApplicationController
   def index
   end
 
-  def create
-  end
-
-  def dashbord
-  end
-
   def check_register_user
-  	
-  end 	
+    @check_user = User.find_by_email(params[:email])
+    respond_to do |format|
+      format.js
+    end
+  end
 end

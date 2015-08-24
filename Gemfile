@@ -10,6 +10,7 @@ gem 'devise', '~> 3.0.0'
 gem 'rubocop', require: false
 gem 'therubyracer'
 gem 'libv8', '3.16.14.3'
+gem 'thin'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,7 +25,10 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
+group :production do
+  gem 'pg'
+  gem 'thin'
+end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

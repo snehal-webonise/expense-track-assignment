@@ -1,0 +1,5 @@
+<ul class="grpList">
+  <% current_user.groups.each do |grp| %>
+    <li><%= link_to grp.name, details_group_path(grp.id) %></li>
+  <% end %>
+</ul>

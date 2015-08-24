@@ -14,13 +14,7 @@ class User < ActiveRecord::Base
   has_many :groups, through: :group_members
   validates :name, presence: true
 
-  def total_balance
-
-  end  
-
-  def tatal_owe
-  end
-  
-  def total_owed
-  end  
+  def self.fetch_paid_by_user(user_id)
+    User.find(user_id).name
+  end 
 end

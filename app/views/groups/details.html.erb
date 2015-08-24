@@ -14,7 +14,7 @@
       <td><%= expense.created_at.strftime('%m/%d/%Y')%></td>
       <td><%= expense.description%></td>
       <td><%= expense.amount%></td>
-      <td><%= User.find(expense.paid_by).name%></td>
+      <td><%= User.fetch_paid_by_user(expense.paid_by)%></td>
     </tr>
     <% end %>
   </tbody>
@@ -22,7 +22,7 @@
 <% @members.each do |mem| %>
   <h5><%= mem.name %> report:</h5>
   <% share_amt = Expense.calculate_share_amt(mem, @grp)%>
-  <% contributors= @members.reject{ |m| m.id == mem.id} %>
+  <% contributors = fetch_contributors(@members, mem) %>
   <table class="table table-bordered">
   <thead>
     <tr>

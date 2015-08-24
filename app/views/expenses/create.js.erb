@@ -1,1 +1,7 @@
-$('#addBillPopup').modal('hide')
+<%if @expense.errors.full_messages.present? %>
+  alert('hi');
+  $('#billerrormsg').replaceWith("<p id='errormsg'> <%= @expense.errors.full_messages[0] %> </p>");
+<% else %>
+  $('#addBill').modal('hide');
+  $('.modal-backdrop').remove();
+<% end %>

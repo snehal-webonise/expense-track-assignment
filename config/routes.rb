@@ -23,15 +23,19 @@ ExpenceTrackingApp::Application.routes.draw do
   resources :users do
     member do
     end
+
+    collection do
+      get :check_register_user
+    end
   end
 
   resources :groups do
     member do
       get :details
-    end     
-  end 
+    end
+  end
 
-  resources :expenses 
+  resources :expenses
 
   # Sample resource route with sub-resources:
   #   resources :products do

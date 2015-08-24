@@ -1,5 +1,7 @@
-<% if @msg.present? %>
-  $('#errormsg').replaceWith("<p id='errormsg'> <%= @msg %> </p>")
-<% else %>  
-  $('#addGroup').close();
-<% end %>  
+<% if @err_msg.present? %>
+  $('#errormsg').replaceWith("<p id='errormsg'> <%= @err_msg %> </p>");
+<% else %>
+  $('#addGroup').modal('hide');
+  $('.modal-backdrop').remove();
+  $('.grpList').replaceWith("<%= escape_javascript(render('/groups/group_list')) %>")
+<% end %>

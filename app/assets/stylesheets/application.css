@@ -17,9 +17,7 @@ body {
 #errormsg{
   color: red;
 }
-#register-form {
-  display: none;
-}
+
 .panel-login {
   border-color: #ccc;
   -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
@@ -123,35 +121,11 @@ body {
   background-color: #1CA347;
   border-color: #1CA347;
 }
-.overlay-bg {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-    /*cursor: pointer;*/
-  background: #000;
- /* fallback */
-  background: rgba(0, 0, 0, 0.52);
-  z-index: 1031;
+.btn-sm{
+  margin-right: 5px;
+}
+.editGrp{
+  margin-left: 15px;
 }
 
-.overlay-content {
-  background: #fff;
-  padding: 20px;
-  width: 420px;
-  position: relative;
-  top: 20%;
-  left: 50%;
-  margin: 0 0 0 -16%;
-  cursor: default;
-  border-radius: 4px;
-}
-
-.overlay-loader {
-  position: relative;
-  top: 30%;
-  left: 3%;
-}
 
