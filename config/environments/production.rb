@@ -20,6 +20,23 @@ ExpenceTrackingApp::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  config.action_mailer.perform_deliveries = true  # Set it to false to disable the email in dev mode
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { :host => "https://pacific-garden-2121.herokuapp.com" }
+
+
+  ActionMailer::Base.smtp_settings = {
+                      :address        => "smtp.gmail.com",
+                      :port           => 587,
+                      :authentication => :plain,
+                      :domain => 'https://pacific-garden-2121.herokuapp.com',
+                      :user_name      => "snehal@weboniselab.com",
+                      :password       => "07061988",
+                      :enable_starttls_auto => true
+  }
+  config.assets.initialize_on_precompile = false
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
