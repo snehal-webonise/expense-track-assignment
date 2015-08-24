@@ -38,8 +38,8 @@
     <% contributors.each do |cont| %>
       <% amt = Expense.fetch_contri(cont, share_amt, @grp)%>
       <td><%=  amt > 0 ? 'Pay : ' : 'Get : '%><%= amt.abs %></td>
-    </tr>
     <% end %>
+    </tr>
   </tbody>
 </table>
 <% end %>

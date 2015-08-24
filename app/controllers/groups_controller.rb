@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
 
   def create
-    params[:mytext].each do |email|
+    params[:emails].each do |email|
       @err_msg = "#{email} is not registered." unless
         User.find_by_email(email).present?
     end
@@ -11,6 +11,7 @@ class GroupsController < ApplicationController
       group.errors.full_messages.present?
   end
 
+  ## Show details of each group.
   def details
     @grp = Group.find(params[:id])
     @expenses = @grp.expenses

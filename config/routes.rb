@@ -20,22 +20,15 @@ ExpenceTrackingApp::Application.routes.draw do
   #   resources :products
 
   # Sample resource route with options:
-  resources :users do
-    member do
-    end
+  resources :users, only: [:index]
 
-    collection do
-      get :check_register_user
-    end
-  end
-
-  resources :groups do
+  resources :groups, only: [:create] do
     member do
       get :details
     end
   end
 
-  resources :expenses
+  resources :expenses, only: [:create]
 
   # Sample resource route with sub-resources:
   #   resources :products do
@@ -60,7 +53,7 @@ ExpenceTrackingApp::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "devise/sessions#new"
+  # root :to => "devise/sessions#new"
 
   # See how all your routes lay out with "rake routes"
 
