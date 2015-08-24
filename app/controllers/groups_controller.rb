@@ -2,8 +2,7 @@ class GroupsController < ApplicationController
 
   def create
     params[:emails].each do |email|
-      @err_msg = "#{email} is not registered." unless
-        User.find_by_email(email).present?
+      @err_msg = User.validate_email(email)
     end
     return if @err_msg.present?
     group = Group.create_group(params, current_user)

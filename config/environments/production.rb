@@ -23,17 +23,17 @@ ExpenceTrackingApp::Application.configure do
   config.action_mailer.perform_deliveries = true  # Set it to false to disable the email in dev mode
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => "pacific-garden-2121.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: 'expense-tracking-app.herokuapp.com' }
 
 
   ActionMailer::Base.smtp_settings = {
-                      :address        => "smtp.gmail.com",
-                      :port           => 587,
-                      :authentication => :plain,
-                      :domain => 'pacific-garden-2121.herokuapp.com',
-                      :user_name      => "snehal@weboniselab.com",
-                      :password       => "07061988",
-                      :enable_starttls_auto => true
+                      address:        'smtp.gmail.com',
+                      port:           587,
+                      authentication: :plain,
+                      domain:         'expense-tracking-app.herokuapp.com',
+                      user_name:      'snehal@weboniselab.com',
+                      password:       '07061988',
+                      enable_starttls_auto:  true
   }
   config.assets.initialize_on_precompile = false
 

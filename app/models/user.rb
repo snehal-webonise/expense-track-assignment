@@ -17,4 +17,12 @@ class User < ActiveRecord::Base
   def self.fetch_paid_by_user(user_id)
     User.find(user_id).name
   end 
+
+  def self.validate_email(email)
+    if !email.present?
+      'Email cant be blank.'
+    elsif !User.find_by_email(email).present?
+      "#{email} is not registered."  
+    end  
+  end  
 end

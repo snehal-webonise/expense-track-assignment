@@ -4,4 +4,5 @@
   $('#addGroup').modal('hide');
   $('.modal-backdrop').remove();
   $('.grpList').replaceWith("<%= escape_javascript(render('/groups/group_list')) %>")
+  $('#group_id').replaceWith("<%= escape_javascript(select_tag 'group_id', options_from_collection_for_select(current_user.groups, 'id', 'name'), { class: 'form-control' } )%>")
 <% end %>
