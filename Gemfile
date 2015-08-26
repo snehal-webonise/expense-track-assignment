@@ -9,6 +9,7 @@ gem 'devise', '~> 3.0.0'
 gem 'rubocop', require: false
 gem 'therubyracer'
 gem 'libv8', '3.16.14.3'
+gem 'rails3-jquery-autocomplete'
 
 # Gems used only for assets and not required
 # in production environments by default.
