@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
         if !User.find_by_email(email).present?
           msg = "#{email} is not registered."  
         elsif email.eql? user.email 
-         msg = "Group owner is the default member!!"
+         msg = "Group owner is the default member!"
         end 
       end  
     end 
