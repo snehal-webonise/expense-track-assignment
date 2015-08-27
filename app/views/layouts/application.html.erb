@@ -4,7 +4,7 @@
   <title>ExpenceTrackingApp</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <!-- <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link> -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -43,9 +43,6 @@
           <h3 class="page-header header"><%= link_to 'Welcome ' + current_user.name, users_path %></h3>
           <%=link_to 'Create Group', new_group_path, class: "btn btn-info btn-sm"%>
           <%=link_to 'Add Bill', new_expense_path, class: "btn btn-info btn-sm" %>
-          <!-- # <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addGroup">Create Group</button> -->
-          <!-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addBill">Add Bill</button> -->
-         <!--  <input type="text" id="email" name="email" tabindex="1" placeholder="Email Address" class="form-control .ui-autocomplete"/> -->
           <%= yield %>
 
           <!-- Popup for create group-->
@@ -56,7 +53,7 @@
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title" id="myModalLabel">Create Group</h4>
                 </div>
-                
+
               </div>
             </div>
           </div>
@@ -69,7 +66,7 @@
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Add Bill</h4>
                 </div>
-              
+
               </div>
             </div>
           </div>

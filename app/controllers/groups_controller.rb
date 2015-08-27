@@ -1,21 +1,23 @@
 class GroupsController < ApplicationController
 
   def new
-  end  
+  end
 
   def create
-    params[:email].each do |email|
+    emails = params[:email][0].split(',').map(&:strip)
+    emails.pop
+    emails.each do |email|
       @err_msg = User.validate_email(email)
     end
     render :action => 'new' and return if @err_msg.present?
-    group = Group.create_group(params, current_user)
+    group = Group.create_group(params, current_user, emails)
     if group.errors.full_messages.present?
-      @err_msg = group.errors.full_messages[0] 
+      @err_msg = group.errors.full_messages[0]
       render :action => 'new'
     else
       redirect_to users_path
-    end  
-      
+    end
+
   end
 
   ## Show details of each group.

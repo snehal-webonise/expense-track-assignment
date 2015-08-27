@@ -20,7 +20,11 @@ ExpenceTrackingApp::Application.routes.draw do
   #   resources :products
 
   # Sample resource route with options:
-  resources :users, only: [:index]
+  resources :users, only: [:index] do
+    collection do
+      get :get_registered_users
+    end
+  end
 
   resources :groups, only: [:new, :create] do
     member do

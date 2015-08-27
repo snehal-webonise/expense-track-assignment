@@ -11,7 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery_ujs  
+//= require jquery_ujs
 //= require_tree .
 
 $(document).ready(function() {
@@ -32,13 +32,24 @@ $(document).ready(function() {
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
 
-    $ajax()
-    arr = ['foo', 'food', 'four']
+    var arr = []
+    $.ajax({
+            type: 'GET',
+            url: '/users/get_registered_users',
+            data: { },
+            dataType: 'json',
+            complete: function(data) {
+              console.log("data "+JSON.stringify(data["responseJSON"]["users"]))
+               arr = data["responseJSON"]["users"]
+            }
+        });
+
+    console.log("arr "+arr);
     // $(".autocomplete").each(function(){
     //    $(this).autocomplete({
     //       source: arr
     //     });
-    //  })  
+    //  })
 
      $( "#email" )
         // don't navigate away from the field on tab when selecting an item
