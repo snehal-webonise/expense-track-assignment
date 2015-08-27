@@ -149,7 +149,9 @@ ul.ui-autocomplete {
     }
   }
 }
-.ui-autocomplete {
+/*.ui-autocomplete {
     z-index: 5000;
 }
-
+.modal-open .typeahead.dropdown-menu {
+  z-index: @zindexDropdown + @zindexModal;
+}*/
