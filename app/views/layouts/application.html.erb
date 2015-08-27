@@ -4,9 +4,11 @@
   <title>ExpenceTrackingApp</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -39,8 +41,11 @@
         </div>
         <div class="col-sm-9 col-md-10">
           <h3 class="page-header header"><%= link_to 'Welcome ' + current_user.name, users_path %></h3>
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addGroup">Create Group</button>
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addBill">Add Bill</button>
+          <%=link_to 'Create Group', new_group_path, class: "btn btn-info btn-sm"%>
+          <%=link_to 'Add Bill', new_expense_path, class: "btn btn-info btn-sm" %>
+          <!-- # <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addGroup">Create Group</button> -->
+          <!-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addBill">Add Bill</button> -->
+         <!--  <input type="text" id="email" name="email" tabindex="1" placeholder="Email Address" class="form-control .ui-autocomplete"/> -->
           <%= yield %>
 
           <!-- Popup for create group-->
@@ -51,37 +56,7 @@
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title" id="myModalLabel">Create Group</h4>
                 </div>
-                <%= form_tag('/groups', remote: true, class: 'form-horizontal') do %>
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <div class="col-sm-10">
-                        <%= text_field_tag :name, nil, tabindex: '1', placeholder: 'Name', autofocus: true, class: "form-control"%>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-sm-10">
-                        <%= text_area_tag :description, nil, cols: '18', tabindex: '1', placeholder: 'Description',
-                        class: "form-control" %>
-                      </div>
-                    </div>
-                    <p>Add member</p>
-                    <div class="form-group">
-                      <div class="col-sm-10">
-                        <input type="text" name="emails[]" tabindex="1" placeholder="Email Address" class="form-control"/>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-sm-10 input_fields_wrap">
-                        <button class="add_field_button btn btn-primary">Add More members</button>
-                       </div>
-                    </div>
-                    <p id='errormsg'></p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <%= submit_tag 'Add', class: "btn btn-primary" %>
-                  </div>
-                <% end %>
+                
               </div>
             </div>
           </div>
@@ -94,31 +69,7 @@
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Add Bill</h4>
                 </div>
-                <%= form_tag('/expenses', remote: true, class: 'form-horizontal') do %>
-                  <div class="modal-body">
-                    <p>With you and</p>
-                    <div class="form-group">
-                      <div class="col-sm-10">
-                        <%= select_tag "group_id", options_from_collection_for_select(current_user.groups, "id", "name"), { class: "form-control" } %>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-sm-10">
-                        <%= text_area_tag :description, nil, cols: '18', tabindex: '1', placeholder: 'Description', class: "form-control" %>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-sm-10">
-                        <%= text_field_tag :amount, nil, tabindex: '1', placeholder: 'Amount', class: "form-control" %>
-                      </div>
-                    </div>
-                    <p id='billerrormsg'></p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <%= submit_tag 'Add', class: 'btn btn-primary' %>
-                  </div>
-                <% end %>
+              
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
     grp = Group.new(name: params[:name], description: params[:description])
     if grp.save
       grp.group_members.create(user_id: owner.id, is_owner: true)
-      params[:emails].each do |email|
+      params[:email].each do |email|
         user = User.find_by_email(email)
         grp.group_members.create(user_id: user.id)
       end

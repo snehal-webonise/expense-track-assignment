@@ -1,0 +1,30 @@
+<h3>Create Group</h3>
+<%= form_tag('/groups', class: 'form-horizontal') do %>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <%= text_field_tag :name, nil, tabindex: '1', placeholder: 'Name', autofocus: true, class: "form-control"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <%= text_area_tag :description, nil, cols: '18', tabindex: '1', placeholder: 'Description',
+      class: "form-control" %>
+    </div>
+  </div>
+  <p>Add member</p>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="text" id='email' name="email[]" tabindex="1" placeholder="Email Address" class="form-control"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10 input_fields_wrap">
+      <button class="add_field_button btn btn-primary">Add More members</button>
+     </div>
+  </div>
+  <p id='errormsg'><%= @err_msg.present? ? @err_msg : ''%></p>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <%= submit_tag 'Add', class: "btn btn-primary" %>
+</div>
+<% end %>

@@ -5,6 +5,11 @@ class ExpensesController < ApplicationController
     @expense = grp.expenses.new(amount: params[:amount],
                                 description: params[:description],
                                 paid_by: current_user.id)
-    @expense.save
+    if @expense.save
+    	redirect_to users_path
+    else
+    	@err_msg = @expense.errors.full_messages[0]
+    	render :action => 'new'
+    end 	
   end
 end

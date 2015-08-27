@@ -22,13 +22,13 @@ ExpenceTrackingApp::Application.routes.draw do
   # Sample resource route with options:
   resources :users, only: [:index]
 
-  resources :groups, only: [:create] do
+  resources :groups, only: [:new, :create] do
     member do
       get :details
     end
   end
 
-  resources :expenses, only: [:create]
+  resources :expenses, only: [:new, :create]
 
   # Sample resource route with sub-resources:
   #   resources :products do
