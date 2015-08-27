@@ -5,10 +5,8 @@ class GroupsController < ApplicationController
 
   def create
     emails = params[:email][0].split(',').map(&:strip)
-    emails.pop
-    emails.each do |email|
-      @err_msg = User.validate_email(email)
-    end
+    emails.uniq!.pop
+    @err_msg  = User.validate_email(emails, current_user)
     render :action => 'new' and return if @err_msg.present?
     group = Group.create_group(params, current_user, emails)
     if group.errors.full_messages.present?

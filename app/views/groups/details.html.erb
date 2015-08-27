@@ -19,10 +19,9 @@
     <% end %>
   </tbody>
 </table>
-<% @members.each do |mem| %>
-  <h5><%= mem.name %> report:</h5>
-  <% share_amt = Expense.calculate_share_amt(mem, @grp)%>
-  <% contributors = fetch_contributors(@members, mem) %>
+  <h5><%= current_user.name %> report:</h5>
+  <% share_amt = Expense.calculate_share_amt(current_user, @grp)%>
+  <% contributors = fetch_contributors(@members, current_user) %>
   <table class="table table-bordered">
   <thead>
     <tr>
@@ -34,7 +33,7 @@
   </thead>
   <tbody>
     <tr>
-      <td><%= mem.name %></td>
+      <td><%= current_user.name %></td>
     <% contributors.each do |cont| %>
       <% amt = Expense.fetch_contri(cont, share_amt, @grp)%>
       <td><%=  amt > 0 ? 'Pay : ' : 'Get : '%><%= amt.abs %></td>
@@ -42,4 +41,3 @@
     </tr>
   </tbody>
 </table>
-<% end %>

@@ -18,11 +18,18 @@ class User < ActiveRecord::Base
     User.find(user_id).name
   end 
 
-  def self.validate_email(email)
-    if !email.present?
-      'Email cant be blank.'
-    elsif !User.find_by_email(email).present?
-      "#{email} is not registered."  
-    end  
+  def self.validate_email(emails, user)
+    if emails.empty? 
+      msg = "Email can't be blank." 
+    else
+      emails.each do |email|
+        if !User.find_by_email(email).present?
+          msg = "#{email} is not registered."  
+        elsif email.eql? user.email 
+         msg = "Group owner is the default member!!"
+        end 
+      end  
+    end 
+    msg  
   end  
 end
